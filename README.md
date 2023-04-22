@@ -1,4 +1,4 @@
-# financialapp-ios
-Financial app demonstrating using Swift, SwiftUI and Core Data
+# Financialapp-iOS
+iOS Financial app demonstration using Swift, SwiftUI and Core Data
 
 Swift Best Practises used.
