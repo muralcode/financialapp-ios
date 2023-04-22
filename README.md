@@ -1,2 +1,2 @@
-# financialapp-ios
-Financial app demonstrating using Swift and SwiftUI
+# FinancialApp-iOS
+Financial app demonstration using Swift and SwiftUI
