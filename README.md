@@ -10,7 +10,7 @@ Swift Best Practises used.
 
 ## Local build process
 
-It is recommended that the information in the other sections of this document are examined prior to attempting to compile and run the Auth app. For the reasons discussed above, a developer cannot simply clone the repository and run the financialApp
+It is recommended that the information in the other sections of this document are examined prior to attempting to compile and run the app. For the reasons discussed above, a developer cannot simply clone the repository and run the financialApp
 
 ### Software Prerequisites
 
