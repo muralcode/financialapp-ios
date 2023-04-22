@@ -54,11 +54,103 @@ class CreateAccountViewModel: ObservableObject {
                              .purple,
                              .gray]
 
-    // TODO: Add methods
 
+     func createAccount() {
+        let currentAccount = Account(context: CoreDataManager.shared.context)
+        CoreDataManager.shared.context.perform {
+            let accountNo = UUID().uuidString.suffix(6)
+            let currentCard = Card(context: CoreDataManager.shared.context)
+            currentCard.expirationDate = self.expDate
+            currentCard.number = self.ccNumber
+            currentCard.cvv = self.cvv
+            currentCard.id = String(accountNo)
+            currentCard.dateCreated = Date()
+            currentCard.color = self.selectedCardColor.hexString
+            currentCard.logo = self.cardLogos[self.selectedCardType]
 
+            if self.accountTypes[self.selectedAccountType] == AccountType.creditcard.rawValue {
+                currentAccount.balance = self.creditLimit
+            } else {
+                currentAccount.balance = Float(self.createRandomBalance())
+            }
+            currentAccount.acctNumber = String(accountNo)
+            currentAccount.firstName = self.firstName
+            currentAccount.lastName = self.lastName
+            currentAccount.dateCreated = Date()
+            currentAccount.type = self.accountTypes[self.selectedAccountType]
+            currentAccount.card = currentCard
+
+            CoreDataManager.shared.save()
+            self.clear()
+        }
+    }
+
+    func hasAccounts() -> Bool {
+        let request: NSFetchRequest<Account> = Account.fetchRequest()
+        var accounts: [Account] = []
+        do {
+            for data in try CoreDataManager.shared.context.fetch(request) {
+                accounts.append(data)
+            }
+            if accounts.count > 0 { return true }
+            return false
+        } catch let error as NSError {
+            fatalError("Unresolved error \(error), \(error.userInfo)")
+        }
+    }
+
+    func fetchCard(with id: String) -> Card? {
+        var card: Card?
+
+        CoreDataManager.shared.context.perform {
+            let request: NSFetchRequest<Card> = Card.fetchRequest()
+            request.predicate = NSPredicate(format: "id = %@", id)
+            request.fetchLimit = 1
+
+            card = try? CoreDataManager.shared.context.fetch(request).first
+        }
+        return card
+    }
+
+    func fetchCards() -> [Card]? {
+        var cards: [Card] = []
+
+        CoreDataManager.shared.context.perform {
+            let request: NSFetchRequest<Card> = Card.fetchRequest()
+            if let items = try? CoreDataManager.shared.context.fetch(request) {
+                for item in items {
+                    cards.append(item)
+                }
+            }
+        }
+
+        return cards
+    }
+
+    func deleteCard(with id: String) {
+        CoreDataManager.shared.context.perform {
+            let request: NSFetchRequest<Card> = Card.fetchRequest()
+            request.predicate = NSPredicate(format: "id = %@", id)
+            request.fetchLimit = 1
+
+            if let item = try? CoreDataManager.shared.context.fetch(request).first {
+                CoreDataManager.shared.context.delete(item)
+            }
+        }
+    }
+
+    func deleteCards() {
+        CoreDataManager.shared.context.perform {
+            let request: NSFetchRequest<Card> = Card.fetchRequest()
+
+            if let items = try? CoreDataManager.shared.context.fetch(request) {
+                for item in items {
+                    CoreDataManager.shared.context.delete(item)
+                }
+            }
+        }
+    }
 }
-
 
 extension CreateAccountViewModel {
     func initAccount() {
