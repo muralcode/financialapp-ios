@@ -4,9 +4,19 @@
 
 Todo: The codebase will be split into a number of modules(Frameworks), these modules will be constructed on a per feature basis.
 
-iOS Financial app demonstration using Swift, SwiftUI and Core Data
+iOS Financial app demonstration using Swift, SwiftUI, Core Data and Cocoa Pods
 
 Swift Best Practises used.
+
+## White Labelled
+
+The Financial App codebase was constructed with white-labelling of the app as one of the primary concerns. In the context of the Financial app, white-labelling is taken to mean that the app supports a default configuration, which is this one - Banking - however, the base functionality and appearance of the Financial App can be customized by an individual client.
+
+As a result, this codebase cannot be viewed in isolation and attention must be paid to the information provided as inputs to a given build artefact. For instance, a number of build configuration fields are used at runtime to determine the behaviour and availability of certain App functionality. Additionally, resources such as strings, images and colours may be swapped out at compile-time in order to change the look and feel of the app, matching a client's requirements.
+
+## Note
+
+Currently the app customizations, images and colors are built within the project (for demonstration purposes) but that will change to accomodate white-labelling and cross plartform capabilities.
 
 ## Local build process
 
