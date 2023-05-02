@@ -12,7 +12,9 @@ Swift Best Practises used.
 
 The Financial App codebase was constructed with white-labelling of the app as one of the primary concerns. In the context of the Financial app, white-labelling is taken to mean that the app supports a default configuration, which is this one - Banking - however, the base functionality and appearance of the Financial App can be customized by an individual client.
 
-As a result, this codebase cannot be viewed in isolation and attention must be paid to the information provided as inputs to a given build artefact. For instance, a number of build configuration fields are used at runtime to determine the behaviour and availability of certain App functionality. Additionally, resources such as strings, images and colours may be swapped out at compile-time in order to change the look and feel of the app, matching a client's requirements.
+The project features an asset-generator which can be viewed here [master](https://github.com/muralcode/mural-asset-generator).
+
+As a result, this codebase cannot be viewed in isolation and attention must be paid to the information provided as inputs to a given build artifact. For instance, a number of build configuration fields are used at runtime to determine the behaviour and availability of certain App functionality. Additionally, resources such as strings, images and colours may be swapped out at compile-time in order to change the look and feel of the app, matching a client's requirements.
 
 ## Note
 
